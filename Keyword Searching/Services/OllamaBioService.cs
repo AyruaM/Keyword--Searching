@@ -30,7 +30,7 @@ public class OllamaBioService
         {
         "hair", "hairstyle", "hair style", "beard", "look", "looks",
         "style", "outfit", "dress", "clothes", "tattoo", "piercing", "makeup", "images"
-,"mp3", "any" ,"lyrics", "download" ,"song"  };
+,"mp3","lyrics", "download" ,"song"  };
 
         // Prepare arrays to keep final answers in input order
         var finalAnswers = new string[keywords.Count]; // will contain "YES" or "NO"
@@ -77,7 +77,7 @@ Classify each keyword as YES or NO based on this rule:
 YES = The keyword describes a person's biography or personal attributes  
 (age, birth, birthplace, birthday, family, parents, spouse, children, siblings, education, occupation, background, wiki, biography, net worth).
 
-NO = Anything else. If unsure → NO.
+NO =please return NO for any song or song related keywords or Anything else. If unsure → NO.
 
 Output EXACTLY {{N}} lines.
 Each line format: ""<index>. YES"" or ""<index>. NO""
