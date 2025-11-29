@@ -1,0 +1,6 @@
+@Keyword_Searching_HostAddress = http://localhost:5202
+
+GET {{Keyword_Searching_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
