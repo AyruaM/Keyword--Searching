@@ -70,16 +70,21 @@ public class OllamaBioService
         string numberedList = string.Join("\n", modelKeywords.Select((k, idx) => $"{idx + 1}. {k}"));
 
         string prompt = $@"
-            You are a strict classifier. For each keyword below, output EXACTLY {modelKeywords.Count} lines.
-            Each line format: <index>. YES  OR  <index>. NO
-            Use 1-based indexing. No extra text.
-            
-            YES = human/person related (age, birthday, family, spouse, parents, children, biography, wiki, net worth).
-            NO = everything else. If unsure -> NO.
-            
-            Keywords:
-            {numberedList}
-            ";
+You are a strict classifier.
+
+RULES:
+1. Output EXACTLY {modelKeywords.Count} lines.
+2. Every line MUST match this regex: ^[0-9]+\\. (YES|NO)$
+3. No explanations, no reasoning, no extra words.
+4. Index starts at 1.
+
+YES = human/person bio (age, birthday, birth year, birthplace, family, spouse,
+parents, children, siblings, education, occupation, biography, wiki, net worth).
+NO = everything else. If unsure → NO.
+
+Keywords:
+{numberedList}
+";
 
         var body = new
         {
