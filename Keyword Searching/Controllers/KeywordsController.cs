@@ -17,16 +17,31 @@ public class BioKeywordsAIController : ControllerBase
         if (file == null || file.Length == 0)
             return BadRequest("No file uploaded.");
 
-        Directory.CreateDirectory("uploads");
+        // Input folder
+        string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+        Directory.CreateDirectory(uploadFolder);
 
-        var savePath = Path.Combine("uploads", file.FileName);
-
-        using (var stream = new FileStream(savePath, FileMode.Create))
+        // Save uploaded file
+        string inputPath = Path.Combine(uploadFolder, file.FileName);
+        using (var stream = new FileStream(inputPath, FileMode.Create))
             await file.CopyToAsync(stream);
 
         var extractor = new BioKeywordExtractor(_ai);
-        var output = await extractor.ExtractBioKeywordsAsync(savePath);
 
-        return Ok(output);
+        // 1️⃣ Extract result list
+        var results = await extractor.ExtractBioKeywordsAsync(inputPath);
+
+        // 2️⃣ Save results to Excel
+        string outputFilePath = extractor.SaveResultsToExcel(results, uploadFolder);
+
+        // 3️⃣ Return as file download
+        var bytes = await System.IO.File.ReadAllBytesAsync(outputFilePath);
+        string fileName = Path.GetFileName(outputFilePath);
+
+        return File(bytes,
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    fileName);
     }
+
+
 }

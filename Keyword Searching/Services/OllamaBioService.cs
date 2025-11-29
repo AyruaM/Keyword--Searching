@@ -29,8 +29,8 @@ public class OllamaBioService
         var appearanceIndicators = new[]
         {
         "hair", "hairstyle", "hair style", "beard", "look", "looks",
-        "style", "outfit", "dress", "clothes", "tattoo", "piercing", "makeup"
-    };
+        "style", "outfit", "dress", "clothes", "tattoo", "piercing", "makeup", "images"
+,"mp3", "any" ,"lyrics", "download" ,"song"  };
 
         // Prepare arrays to keep final answers in input order
         var finalAnswers = new string[keywords.Count]; // will contain "YES" or "NO"
@@ -80,7 +80,7 @@ RULES:
 
 YES = human/person bio (age, birthday, birth year, birthplace, family, spouse,
 parents, children, siblings, education, occupation, biography, wiki, net worth).
-NO = everything else. If unsure → NO.
+NO = any specific keyword or song related and everything else. If unsure → NO.
 
 Keywords:
 {numberedList}
