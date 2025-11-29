@@ -70,25 +70,25 @@ public class OllamaBioService
         string numberedList = string.Join("\n", modelKeywords.Select((k, idx) => $"{idx + 1}. {k}"));
 
         string prompt = $@"
-You are a strict classifier.
+You are a classification machine.
 
-RULES:
-1. Output EXACTLY {modelKeywords.Count} lines.
-2. Every line MUST match this regex: ^[0-9]+\\. (YES|NO)$
-3. No explanations, no reasoning, no extra words.
-4. Index starts at 1.
+Classify each keyword as YES or NO based on this rule:
 
-YES = human/person bio (age, birthday, birth year, birthplace, family, spouse,
-parents, children, siblings, education, occupation, biography, wiki, net worth).
-NO = any specific keyword or song related and everything else. If unsure → NO.
+YES = The keyword describes a person's biography or personal attributes  
+(age, birth, birthplace, birthday, family, parents, spouse, children, siblings, education, occupation, background, wiki, biography, net worth).
 
-Keywords:
-{numberedList}
+NO = Anything else. If unsure → NO.
+
+Output EXACTLY {{N}} lines.
+Each line format: ""<index>. YES"" or ""<index>. NO""
+No extra words. No explanations.
+
+Keywords:{numberedList}
 ";
 
         var body = new
         {
-            model = "deepseek-r1:8b",
+            model = "llama3.1:8b",
             messages = new[]
             {
             new Dictionary<string,string>
