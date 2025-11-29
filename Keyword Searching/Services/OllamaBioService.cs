@@ -88,7 +88,7 @@ Keywords:
 
         var body = new
         {
-            model = "deepseek-r1:1.5b",
+            model = "deepseek-r1:8b",
             messages = new[]
             {
             new Dictionary<string,string>
