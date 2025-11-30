@@ -30,7 +30,7 @@ public class OllamaBioService
         {
         "hair", "hairstyle", "hair style", "beard", "look", "looks",
         "style", "outfit", "dress", "clothes", "tattoo", "piercing", "makeup", "images"
-,"mp3","lyrics", "download" ,"song"  };
+        ,"mp3","lyrics", "download" ,"song"  };
 
         // Prepare arrays to keep final answers in input order
         var finalAnswers = new string[keywords.Count]; // will contain "YES" or "NO"
